@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+/*
+  Token visual Servisin.
+  aspal  — teks utama, warna jalan
+  montir — biru wearpack mekanik, warna aksi
+  karcis — kuning karcis antrean, HANYA untuk nomor antrean
+*/
+@theme {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-papan: var(--font-barlow), var(--font-jakarta), ui-sans-serif, sans-serif;
+
+  --color-aspal: #1f2a33;
+  --color-aspal-2: #3a4752;
+  --color-kabut: #5d6b77;
+  --color-garis: #d5dbe1;
+  --color-latar: #eef1f4;
+  --color-kertas: #ffffff;
+
+  --color-montir: #2346a8;
+  --color-montir-tua: #1a367f;
+  --color-montir-muda: #e6ecfa;
+
+  --color-karcis: #f2b705;
+  --color-karcis-muda: #fdf3cf;
+
+  --color-hijau: #1e7f52;
+  --color-hijau-muda: #e1f2e9;
+  --color-oranye: #a8580a;
+  --color-oranye-muda: #fcebd9;
+  --color-merah: #b83a26;
+  --color-merah-muda: #f9e5e1;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-latar);
+    color: var(--color-aspal);
+    font-family: var(--font-sans);
+    font-feature-settings: "tnum" 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-montir);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: var(--color-karcis-muda);
+  }
+}
+
+@layer components {
+  /* Karcis antrean: tepi kiri-kanan bertakik seperti tiket sobek. */
+  .karcis {
+    --takik: 7px;
+    background: var(--color-karcis);
+    color: var(--color-aspal);
+    mask:
+      radial-gradient(var(--takik) at left, #0000 98%, #000) left / 51% 100% no-repeat,
+      radial-gradient(var(--takik) at right, #0000 98%, #000) right / 51% 100% no-repeat;
+  }
+  .angka {
+    font-family: var(--font-papan);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
